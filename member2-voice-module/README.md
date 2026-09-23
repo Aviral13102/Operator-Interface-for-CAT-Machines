@@ -6,32 +6,44 @@ Member 1's `alert` messages (see [`../CONTRACT.md`](../CONTRACT.md)), not
 against the real Claude integration — `mock_llm_server.py` stands in for
 that until Hour 10.
 
-## Tasks
+## Tasks (Completed)
+- **`useVoice` hook**: Wraps the Web Speech API (STT & TTS). Safely detects if the browser doesn't support it and fails gracefully to text/touch mode.
+- **Nudge UI component**: Renders incoming `alert` messages and reads them aloud. Allows operators to respond either via voice or by tapping large touch-friendly buttons.
+- **Standalone Commands**: Continuous listening for "read my ETA" (speaks back telemetry stats) or "log a break" (sends a proposed `alert_response` schema payload).
+- **Dev Shim (`DevAlertInjector.jsx`)**: Added to manually fetch alerts from `mock_llm_server.py` into the UI. *(See Architectural Notes below)*
 
-1. **`useVoice` hook**: wraps the Web Speech API — `SpeechRecognition`
-   for input, `SpeechSynthesis` for output. Handle the "not supported in
-   this browser" case explicitly (fall back to text input) since this
-   will be demoed live and you don't want a silent failure on stage.
-2. **Nudge UI component**: renders an incoming `alert` message as both a
-   visual card and a spoken line. If `requires_response` is true, show
-   the `response_options` and accept either a voice answer or a tap —
-   voice can fail in a noisy demo room, so always keep the tap fallback.
-3. **Response wiring**: when the operator answers, send the
-   `alert_response` message shape from `CONTRACT.md` back over the
-   shared WebSocket (via Member 1's context, not a new connection).
-4. **Simple voice commands**: at minimum, support something like "read
-   my ETA" and "log a break" as directly-spoken commands, not just
-   responses to prompts — this is what separates "voice-enabled" from
-   "has a microphone icon."
-5. **`mock_llm_server.py`**: a `/mock/nudge` endpoint that takes a
-   rule-trigger payload and returns a canned `alert` message in the
-   `CONTRACT.md` shape, so you can build and demo the voice flow without
-   waiting on the real Claude wiring.
+---
 
-## Local run
+## 🚨 Architectural Notes & Dev Shim
+
+Currently, Member 1's `mock_server.py` **does not** poll `mock_llm_server.py` to inject mock alerts into the shared WebSocket stream.
+
+To allow independent development and testing of the Nudge UI, this module includes a **DevAlertInjector** shim. When running in dev mode (`import.meta.env.DEV`), a small box appears at the bottom of the slot allowing you to manually trigger "Idling" or "Seatbelt" alerts. These fetch directly from port 8002 and inject into the local state.
+
+**Member 1 To-Do:** For the final integration, `mock_server.py` (or the real backend) must handle injecting these `alert` messages directly into the WebSocket.
+
+---
+
+## How to run the full stack
+
+You need to run all the servers together to test the full flow:
 
 ```bash
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+# Terminal 1: Member 1's WebSocket telemetry server (Port 8001)
+cd member1-core-shell
+python mock_server.py
+
+# Terminal 2: Member 2's Mock LLM / Alert server (Port 8002)
+cd member2-voice-module
 python mock_llm_server.py
+
+# Terminal 3: Member 3's Mock Safety Server (Port 8003)
+cd member3-safety-deploy
+python mock_safety_server.py
+
+# Terminal 4: Frontend React App (Port 5173)
+# Run from the repository root
+npm run dev
 ```
+
+Once running, you can click "Inject Idling Alert" in the Dev Tools box in the UI to see the Voice Nudge card appear and speak.
