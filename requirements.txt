@@ -1,0 +1,18 @@
+# Combined environment — union of member1/member2/member3 requirements.txt,
+# plus the Phase 1/2 backend's own dependencies, so the fully merged
+# system (mocks retired, real backend wired in) installs from one file.
+# Versions are pinned identically across all four files on purpose —
+# if you bump a version, update it everywhere, not just your own file.
+
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+websockets==13.1
+pydantic==2.9.2
+python-dotenv==1.0.1
+pandas==2.2.3
+anthropic==0.34.2
+
+# Phase 1/2 backend (task-time model + rule engine) — included here so the
+# merged Phase 3 + Phase 1/2 system runs from this single file at deploy time
+scikit-learn==1.5.2
+joblib==1.4.2

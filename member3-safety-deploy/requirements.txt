@@ -1,0 +1,6 @@
+# Member 3 — Safety, Gamification & Deployment
+# Local dependencies for mock_safety_server.py + deploy scripts
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+python-dotenv==1.0.1
