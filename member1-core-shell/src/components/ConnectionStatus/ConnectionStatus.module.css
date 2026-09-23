@@ -1,0 +1,35 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotGreen  { background: var(--color-green); }
+.dotAmber  { background: var(--color-amber); }
+.dotRed    { background: var(--color-red);   }
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.textMuted { color: var(--color-text-muted); }
+.textAmber { color: var(--color-amber);      }
+.textRed   { color: var(--color-red);        }
+
+/* Amber pulse animation used while reconnecting */
+@keyframes pulse {
+  0%, 100% { opacity: 1;   }
+  50%       { opacity: 0.3; }
+}
+.pulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}

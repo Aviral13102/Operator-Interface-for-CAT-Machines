@@ -1,0 +1,76 @@
+/* ============================================================================
+   index.css — Global reset + CSS custom properties (CAT Spotter design tokens)
+   Member 1 / Core Shell
+   ============================================================================
+
+   All components use var(--token-name) from this file.
+   Do not put component-specific styles here — use CSS Modules for that.
+   ============================================================================ */
+
+/* ── Box model reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Design tokens ───────────────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --color-cat-yellow:   #FFCD11;   /* Caterpillar yellow */
+  --color-cat-dark:     #1A1A1A;   /* Near-black for text on yellow */
+
+  /* Backgrounds */
+  --color-bg:           #111213;   /* Page background */
+  --color-surface:      #1C1E20;   /* Card / header surface */
+  --color-surface-alt:  #24272A;   /* Slightly lighter surface (slot placeholder) */
+
+  /* Borders */
+  --color-border:       #2E3235;
+  --color-border-muted: #3A3E42;
+
+  /* Text */
+  --color-text:          #E8EAED;
+  --color-text-secondary:#9AA0A6;
+  --color-text-muted:    #5F6368;
+
+  /* Semantic colours */
+  --color-green:    #34A853;
+  --color-amber:    #FBBC04;
+  --color-amber-bg: rgba(251,188,4,0.12);
+  --color-red:      #EA4335;
+  --color-red-bg:   rgba(234,67,53,0.12);
+
+  /* Spacing / shape */
+  --radius:    6px;
+  --radius-lg: 12px;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+               'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── Base typography ─────────────────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* Remove list decorations used in layout contexts */
+ul, ol {
+  list-style: none;
+}
+
+/* Sensible image defaults */
+img, video {
+  max-width: 100%;
+  display: block;
+}

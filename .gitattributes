@@ -1,0 +1,9 @@
+# Normalize all text files to LF in the repo (cross-platform team)
+* text=auto eol=lf
+
+# Explicitly mark binary files so Git never mangles them
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
