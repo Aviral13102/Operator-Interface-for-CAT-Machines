@@ -1,0 +1,36 @@
+.container {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border: 1px dashed var(--color-border-muted);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.buttonRow button {
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-muted);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttonRow button:hover {
+  background: var(--color-border-muted);
+  color: var(--color-text);
+}

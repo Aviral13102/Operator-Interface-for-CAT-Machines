@@ -30,6 +30,7 @@ import { useTelemetry } from '../../hooks/useTelemetry';
 import { ConnectionStatus } from '../ConnectionStatus/ConnectionStatus';
 import { EtaDisplay, EtaDisplaySkeleton } from '../EtaDisplay/EtaDisplay';
 import { Slot } from '../Slot/Slot';
+import { VoiceModule } from '../../../../member2-voice-module/src';
 import styles from './TaskDashboard.module.css';
 
 /** Map raw weather strings to readable emoji labels */
@@ -64,7 +65,9 @@ export function TaskDashboard() {
 
         {/* Bottom slots */}
         <div className={styles.slots}>
-          <Slot name="voice-nudge"   label="[Member 2] Voice Nudge UI" />
+          <Slot name="voice-nudge" label="[Member 2] Voice Nudge UI">
+            <VoiceModule />
+          </Slot>
           <Slot name="safety-panel"  label="[Member 3] Safety / Idling Panel + Leaderboard" />
         </div>
       </div>
@@ -137,22 +140,10 @@ export function TaskDashboard() {
       </main>
 
       {/* ── Bottom: placeholder slots for Members 2 & 3 ─────────────────── */}
-      {/*                                                                     */}
-      {/*  Member 2 — drop your NudgePanel (or similar) here:                */}
-      {/*    <Slot name="voice-nudge" label="...">                            */}
-      {/*      <NudgePanel />                                                 */}
-      {/*    </Slot>                                                          */}
-      {/*                                                                     */}
-      {/*  Member 3 — drop your SafetyPanel here:                             */}
-      {/*    <Slot name="safety-panel" label="...">                           */}
-      {/*      <SafetyPanel />                                                */}
-      {/*    </Slot>                                                          */}
-      {/*                                                                     */}
       <div className={styles.slots}>
-        <Slot
-          name="voice-nudge"
-          label="[Member 2] Voice Nudge UI"
-        />
+        <Slot name="voice-nudge" label="[Member 2] Voice Nudge UI">
+          <VoiceModule />
+        </Slot>
         <Slot
           name="safety-panel"
           label="[Member 3] Safety / Idling Panel + Leaderboard"
