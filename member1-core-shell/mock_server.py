@@ -16,7 +16,10 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-import pandas as pd
+try:
+    import pandas as pd
+except ImportError:
+    pd = None
 from fastapi import FastAPI, WebSocket
 from fastapi.websockets import WebSocketDisconnect
 
@@ -43,8 +46,11 @@ def load_rows() -> list[dict]:
                 "estimated_time_min": 42,
             }
         ]
-    df = pd.read_csv(CSV_PATH)
-    return df.to_dict(orient="records")
+    if pd is not None:
+        df = pd.read_csv(CSV_PATH)
+        return df.to_dict(orient="records")
+    else:
+        return []
 
 
 def to_telemetry_message(row: dict) -> dict:
@@ -72,13 +78,20 @@ def to_telemetry_message(row: dict) -> dict:
 async def telemetry_feed(websocket: WebSocket):
     await websocket.accept()
     rows = load_rows()
+    print(f"[mock_server] WebSocket accepted, replaying {len(rows)} rows", flush=True)
     try:
         while True:
             for row in rows:
-                await websocket.send_text(json.dumps(to_telemetry_message(row)))
+                msg = json.dumps(to_telemetry_message(row))
+                print(f"[mock_server] Sending: {msg[:80]}...", flush=True)
+                await websocket.send_text(msg)
                 await asyncio.sleep(REPLAY_DELAY_SECONDS)
     except WebSocketDisconnect:
-        pass
+        print("[mock_server] Client disconnected", flush=True)
+    except Exception as e:
+        print(f"[mock_server] ERROR in ws handler: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
 
 
 if __name__ == "__main__":

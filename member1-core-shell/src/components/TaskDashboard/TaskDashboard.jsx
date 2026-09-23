@@ -30,6 +30,7 @@ import { useTelemetry } from '../../hooks/useTelemetry';
 import { ConnectionStatus } from '../ConnectionStatus/ConnectionStatus';
 import { EtaDisplay, EtaDisplaySkeleton } from '../EtaDisplay/EtaDisplay';
 import { Slot } from '../Slot/Slot';
+import { SafetyPanel } from '../SafetyPanel/SafetyPanel';
 import styles from './TaskDashboard.module.css';
 
 /** Map raw weather strings to readable emoji labels */
@@ -65,7 +66,7 @@ export function TaskDashboard() {
         {/* Bottom slots */}
         <div className={styles.slots}>
           <Slot name="voice-nudge"   label="[Member 2] Voice Nudge UI" />
-          <Slot name="safety-panel"  label="[Member 3] Safety / Idling Panel + Leaderboard" />
+          <SafetyPanel />
         </div>
       </div>
     );
@@ -153,10 +154,7 @@ export function TaskDashboard() {
           name="voice-nudge"
           label="[Member 2] Voice Nudge UI"
         />
-        <Slot
-          name="safety-panel"
-          label="[Member 3] Safety / Idling Panel + Leaderboard"
-        />
+        <SafetyPanel />
       </div>
 
     </div>

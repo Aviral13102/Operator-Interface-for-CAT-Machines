@@ -1,0 +1,121 @@
+.container {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.badgeText {
+  color: var(--color-cat-yellow);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.title {
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 205, 17, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-cat-yellow);
+}
+
+.timeDisplay {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.bigNumber {
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.unit {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.costBox {
+  margin-top: 16px;
+  background-color: rgba(255, 205, 17, 0.05);
+  border: 1px solid rgba(255, 205, 17, 0.2);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.costBox:hover {
+  background-color: rgba(255, 205, 17, 0.1);
+  border-color: rgba(255, 205, 17, 0.4);
+}
+
+.costLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dollarIcon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-cat-yellow);
+}
+
+.costDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.costValue {
+  color: var(--color-cat-yellow);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.costLabel {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.costRate {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}

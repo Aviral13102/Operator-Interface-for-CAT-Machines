@@ -34,12 +34,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/ws': {
-        target: 'ws://localhost:8001',
+        target: 'http://localhost:8001',
         ws: true,           // enable WebSocket proxying
         changeOrigin: true,
       },
       '/api': {
-        target: 'http://localhost:8001',
+        target: 'http://localhost:8003',
         changeOrigin: true,
       },
     },
