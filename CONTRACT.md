@@ -94,3 +94,19 @@ Sent when actual time significantly exceeds estimated time on a task type.
   the contract wins — fix the mock, don't quietly diverge.
 - Any change to a shape here after Hour 1 needs a one-line heads-up to
   the other two members before you push it.
+
+## [PROPOSED - Pending Team Agreement] Standalone Voice Commands
+
+Sent by the UI when the operator issues a spontaneous voice command (e.g., "log a break") that is not in response to a specific incoming `alert`.
+
+Reuses the `alert_response` shape but specifically sets `alert_id` to `null` and introduces a `trigger` field.
+
+```json
+{
+  "type": "alert_response",
+  "alert_id": null,
+  "trigger": "voice_command",
+  "response": "Taking a break"
+}
+```
+*Member 1 & 3: Please review this addition to support Member 2's direct voice commands.*
